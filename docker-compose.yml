@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  flask:
+    image: webapp-flask
+    build:
+      context: .
+      dockerfile: Dockerfile-flask
+    restart: always
+    volumes:
+      - ./:/app
+      - /etc/localtime:/etc/localtime:ro
+
+  nginx:
+    image: webapp-nginx
+    build:
+      context: .
+      dockerfile: Dockerfile-nginx
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - flask
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+
+  mysql:
+    image: webapp-mysql
+    build:
+      context: .
+      dockerfile: Dockerfile-mysql
+    restart: always
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    volumes:
+#      - ./mysql:/var/lib/mysql
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d/
+      - /etc/localtime:/etc/localtime:ro
+#      - mysql_data:/var/lib/mysql/data
+
+#volumes:
+#  mysql_data:
+
+#networks:
+#  hccu:

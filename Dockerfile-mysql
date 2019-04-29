@@ -1,0 +1,11 @@
+FROM mysql:8.0
+
+ENV MYSQL_DATABASE=hccu \
+    MYSQL_USER=hccu \
+    MYSQL_PASSWORD=hccu \
+    MYSQL_ROOT_PASSWORD=hccu_root
+
+
+EXPOSE 3306
+
+COPY my.cnf /etc/mysql/my.cnf
