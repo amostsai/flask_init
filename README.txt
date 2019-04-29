@@ -1,4 +1,6 @@
 
+本範本根據參考資料網頁調整而成
+
 ## 啟用flask, nginx, mysql服務
 $ docker-compose up
 
@@ -14,3 +16,7 @@ $ docker exec -it flask_init_mysql_1 mysql -u hccu -p
 
 ## 備份資料庫
 $ docker exec -i flask_init_mysql_1 mysqldump -u hccu -p hccu > backup_db.sql
+
+
+## 參考資料
+https://medium.com/bitcraft/docker-composing-a-python-3-flask-app-line-by-line-93b721105777
