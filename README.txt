@@ -1,7 +1,10 @@
 
 本範本根據參考資料網頁調整而成
 
-## 啟用flask, nginx, mysql服務
+## 下載本專案
+$ git clone https://github.com/amostsai/flask_init.git
+
+## 啟用flask/uwsgi, nginx, mysql服務
 $ docker-compose up
 
 ## 登入mysql container，建立資料庫
