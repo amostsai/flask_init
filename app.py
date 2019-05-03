@@ -22,7 +22,7 @@
 #    app.run()
 
 
-
+from datetime import datetime
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
@@ -32,7 +32,9 @@ app.config['MYSQL_HOST'] = 'mysql'
 app.config['MYSQL_USER'] = 'hccu'
 app.config['MYSQL_PASSWORD'] = 'hccu'
 app.config['MYSQL_DB'] = 'hccu'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://hccu:hccu@mysql/hccu'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://{}:{}@{}/{}'.format(app.config['MYSQL_USER'], app.config['MYSQL_PASSWORD'], app.config['MYSQL_HOST'], app.config['MYSQL_DB'])
+print(app.config['SQLALCHEMY_DATABASE_URI'])
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://hccu:hccu@mysql/hccu'
 #app.config['SQLALCHEMY_DATABASE_URI'] = '{}+{}://{}:{}@{}:{}/{}?charset=utf8'.format(DIALECT,DRIVER,USERNAME,PASSWORD,HOST,PORT,DATABASE)
 
 db = SQLAlchemy()
@@ -45,8 +47,9 @@ def index():
         details = request.form
         firstName = details['fname']
         lastName = details['lname']
+        createDateTime = datetime.now().strftime('%Y/%m/%d %H:%M:%S.%f')
 
-        sql = text('INSERT INTO MyUsers(firstName, lastName) VALUES ("%s", "%s")' % (firstName, lastName))
+        sql = text('INSERT INTO MyUsers(firstName, lastName, createDateTime) VALUES ("%s", "%s", "%s")' % (firstName, lastName, createDateTime))
         db.engine.execute(sql)
         return 'success'
     return render_template('index.html')

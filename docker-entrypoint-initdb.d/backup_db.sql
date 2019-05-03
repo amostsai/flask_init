@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.16, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.26, for Linux (x86_64)
 --
 -- Host: localhost    Database: hccu
 -- ------------------------------------------------------
--- Server version	8.0.16
+-- Server version	5.7.26
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
- SET NAMES utf8mb4 ;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,10 +21,11 @@
 
 DROP TABLE IF EXISTS `MyUsers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `MyUsers` (
   `firstname` varchar(30) NOT NULL,
-  `lastname` varchar(30) NOT NULL
+  `lastname` varchar(30) NOT NULL,
+  `createDateTime` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -34,7 +35,7 @@ CREATE TABLE `MyUsers` (
 
 LOCK TABLES `MyUsers` WRITE;
 /*!40000 ALTER TABLE `MyUsers` DISABLE KEYS */;
-INSERT INTO `MyUsers` VALUES ('nextt','tv');
+INSERT INTO `MyUsers` VALUES ('next','tv',NULL);
 /*!40000 ALTER TABLE `MyUsers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -47,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-30  6:00:04
+-- Dump completed on 2019-05-04  6:35:46
