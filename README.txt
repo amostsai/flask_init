@@ -18,3 +18,11 @@ $ docker exec -i flask_init_mysql_1 mysqldump -u hccu -p hccu > backup_db.sql
 ## 參考資料
 https://medium.com/bitcraft/docker-composing-a-python-3-flask-app-line-by-line-93b721105777
 https://www.codementor.io/adityamalviya/python-flask-mysql-connection-rxblpje73
+
+
+-----
+# remote debug  （將遠端檔案傳回本機執行!!）
+1. ssh -R 52698:localhost:52698 root@[遠端電腦的IP]
+    a. cd [專案所在資料夾]
+    b. rmate [專案第一個執行的程式]
+2. vscode 會自動打開該檔案

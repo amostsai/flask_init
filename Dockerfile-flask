@@ -12,11 +12,12 @@ RUN mkdir $APP
 WORKDIR $APP
 
 # Expose the port uWSGI will listen on
-EXPOSE 5000
+EXPOSE 5000 22
 
 # Copy the requirements file in order to install
 # Python dependencies
 COPY requirements.txt .
+COPY rmate /usr/local/bin/rmate
 
 # Install Python dependencies
 RUN pip3 install -r requirements.txt
@@ -24,6 +25,19 @@ RUN pip3 install -r requirements.txt
 # We copy the rest of the codebase into the image
 COPY . .
 
+
+# ssh test
+RUN apt update && apt install -y openssh-server && \
+    mkdir /var/run/sshd && \
+    echo 'root:root' | chpasswd && \
+    sed -ri 's/^#?PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config && \
+    sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config && \
+    mkdir /root/.ssh && \
+    apt clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+
 # Finally, we run uWSGI with the ini file we
 # created earlier
-CMD [ "uwsgi", "--ini", "app.ini" ]
+#CMD [ "uwsgi", "--ini", "app.ini" ]
+CMD /usr/sbin/sshd -D; uwsgi --ini app.ini
