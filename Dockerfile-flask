@@ -39,5 +39,8 @@ RUN apt update && apt install -y openssh-server && \
 
 # Finally, we run uWSGI with the ini file we
 # created earlier
-#CMD [ "uwsgi", "--ini", "app.ini" ]
-CMD /usr/sbin/sshd -D; uwsgi --ini app.ini
+CMD [ "uwsgi", "--ini", "app.ini" ]
+#CMD ["/usr/sbin/sshd", "-D"]
+#CMD ["sh", "-c", "uwsgi --ini app.ini; /usr/sbin/sshd -D"]
+#CMD ["./flask_cmd"]
+#ENTRYPOINT ["./flask_cmd.sh"]
