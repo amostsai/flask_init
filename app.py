@@ -15,6 +15,7 @@ db.init_app(app)
 #     id = db.Column(db.Integer(), primary_key=True)
 #     username = db.Column(db.String(255))
 #     password = db.Column(db.String(255))
+#     lastLoginDateTime = db.Column(db.DateTime)
 
 #     def __init__(self, username):
 #         self.username = username
@@ -27,12 +28,13 @@ db.init_app(app)
 def index():
     if request.method == "POST":
         details = request.form
-        firstName = details['fname']
-        lastName = details['lname']
-        createDateTime = datetime.now().strftime('%Y/%m/%d %H:%M:%S.%f')
+        username = details['username']
+        password = details['password']
+        lastLoginDateTime = datetime.now().strftime('%Y/%m/%d %H:%M:%S.%f')
 
-        sql = text('INSERT INTO MyUsers(firstName, lastName, createDateTime) VALUES ("%s", "%s", "%s")' % (
-            firstName, lastName, createDateTime))
+        sql = text('INSERT INTO Users(username, password, lastLoginDateTime) VALUES ("%s", "%s", "%s")' % (
+            username, password, lastLoginDateTime))
+        print(sql)
         db.engine.execute(sql)
         return 'success'
     return render_template('index.html')

@@ -16,27 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `MyUsers`
+-- Table structure for table `Users`
 --
 
-DROP TABLE IF EXISTS `MyUsers`;
+DROP TABLE IF EXISTS `Users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `MyUsers` (
-  `firstname` varchar(30) NOT NULL,
-  `lastname` varchar(30) NOT NULL,
-  `createDateTime` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `Users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `lastLoginDateTime` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `MyUsers`
+-- Dumping data for table `Users`
 --
 
-LOCK TABLES `MyUsers` WRITE;
-/*!40000 ALTER TABLE `MyUsers` DISABLE KEYS */;
-INSERT INTO `MyUsers` VALUES ('next','tv',NULL);
-/*!40000 ALTER TABLE `MyUsers` ENABLE KEYS */;
+LOCK TABLES `Users` WRITE;
+/*!40000 ALTER TABLE `Users` DISABLE KEYS */;
+INSERT INTO `Users` VALUES (1,'admin','12345678',NULL);
+/*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-04  6:35:46
+-- Dump completed on 2019-06-01  8:03:59
