@@ -1,0 +1,14 @@
+<HTML>
+  <BODY bgcolor="cyan">
+    <form method="POST" action="/api/v1/user/{{ user.id }}">
+      <center>
+        <H1>修改帳號 </H1> <br />
+        <input type="hidden" name="id" />
+        帳號：
+        <input type="text" name="username" value="{{ user.username }}" /><br />
+        密碼： <input type="text" name="password" /> <br />
+        <input type="submit" />
+      </center>
+    </form>
+  </BODY>
+</HTML>
