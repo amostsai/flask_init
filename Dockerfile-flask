@@ -4,7 +4,8 @@ FROM python:3
 
 # Set an environment variable with the directory
 # where we'll be running the app
-ENV APP /app
+ENV APP /app \
+    PYTHONUNBUFFERED 1 # python 執行訊息重新顯示到標準輸出
 
 # Create the directory and instruct Docker to operate
 # from there from now on

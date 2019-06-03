@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   flask:
@@ -8,10 +8,11 @@ services:
       dockerfile: Dockerfile-flask
     restart: always
     ports:
-      - '32770:22'
+      - "32770:22"
     volumes:
       - ./:/app
       - /etc/localtime:/etc/localtime:ro
+    working_dir: /app
 
   nginx:
     image: webapp-nginx
@@ -20,7 +21,7 @@ services:
       dockerfile: Dockerfile-nginx
     restart: always
     ports:
-      - '80:80'
+      - "80:80"
     depends_on:
       - flask
     volumes:
@@ -33,11 +34,11 @@ services:
       dockerfile: Dockerfile-mysql
     restart: always
     ports:
-      - '3306:3306'
+      - "3306:3306"
     expose:
-      - '3306'
+      - "3306"
     volumes:
-#      - ./mysql:/var/lib/mysql
+      #      - ./mysql:/var/lib/mysql
       - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d/
       - /etc/localtime:/etc/localtime:ro
 #      - mysql_data:/var/lib/mysql/data
