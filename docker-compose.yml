@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: ./env/flask/Dockerfile-flask
+    environment:
+      - FLASK_ENV
     restart: always
     ports:
       - "32770:22"
