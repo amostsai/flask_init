@@ -5,12 +5,13 @@ services:
     image: webapp-flask
     build:
       context: .
-      dockerfile: Dockerfile-flask
+      dockerfile: ./env/flask/Dockerfile-flask
     restart: always
     ports:
       - "32770:22"
+      - "8888:8888" # 測試用，正式環境需刪除
     volumes:
-      - ./:/app
+      - ./webapp:/app
       - /etc/localtime:/etc/localtime:ro
     working_dir: /app
 
@@ -18,7 +19,7 @@ services:
     image: webapp-nginx
     build:
       context: .
-      dockerfile: Dockerfile-nginx
+      dockerfile: ./env/nginx/Dockerfile-nginx
     restart: always
     ports:
       - "80:80"
@@ -31,7 +32,7 @@ services:
     image: webapp-mysql
     build:
       context: .
-      dockerfile: Dockerfile-mysql
+      dockerfile: ./env/mysql/Dockerfile-mysql
     restart: always
     ports:
       - "3306:3306"
@@ -39,7 +40,7 @@ services:
       - "3306"
     volumes:
       #      - ./mysql:/var/lib/mysql
-      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d/
+      - ./env/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d/
       - /etc/localtime:/etc/localtime:ro
 #      - mysql_data:/var/lib/mysql/data
 

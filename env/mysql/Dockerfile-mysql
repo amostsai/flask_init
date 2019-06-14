@@ -8,4 +8,4 @@ ENV MYSQL_DATABASE=hccu \
 
 EXPOSE 3306
 
-COPY my.cnf /etc/mysql/my.cnf
+COPY ./env/mysql/my.cnf /etc/mysql/my.cnf
