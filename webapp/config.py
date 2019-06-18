@@ -8,6 +8,7 @@ class ProdConfig(Config):
 
 class DevConfig(Config):
     DEBUG = True
+    SERVER_NAME = 'localhost:8888'
 
     MYSQL_HOST = 'mysql'
     MYSQL_USER = 'hccu'
