@@ -10,5 +10,5 @@ def news_home():
 
 
 @news.route('/pricing')
-def news_terms():
+def news_pricing():
     return render_template('pricing.html')
