@@ -11,6 +11,12 @@ $ docker-compose up
 1. 打開瀏覽器，連到http://localhost
 2. 輸入姓、名資料
 
+## 測試環境
+uwsgi --module app --callable app --http :8888 --master --enable-threads --py-autoreload=1
+
+## 執行測試
+docker-compose exec flask py.test tests
+
 ## 備份資料庫
 $ docker exec -i flask_init_mysql_1 mysqldump -u hccu -p hccu > backup_db.sql
 

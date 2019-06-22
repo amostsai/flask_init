@@ -15,3 +15,6 @@ def create_app(settings_override=None):
     app.register_blueprint(news)
 
     return app
+
+
+app = create_app()
