@@ -1,20 +1,19 @@
+import os
 from flask import Flask
 
-from config import DevConfig
 from blueprints.news import news
 
 
-def create_app(settings_override=None):
+def create_app(mode):
     app = Flask(__name__)
-    app.config.from_object(DevConfig)
+    app.config.from_object(mode)
     # app.config.from_pyfile('config.py', silent=True)
-
-    if settings_override:
-        app.config.update(settings_override)
 
     app.register_blueprint(news)
 
     return app
 
 
-app = create_app()
+# default to prod config
+env = os.environ.get('FLASK_ENV', 'prod')
+app = create_app('config.%sConfig' % env.capitalize())

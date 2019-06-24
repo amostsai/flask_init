@@ -1,14 +1,18 @@
+from flask import g
+
+
 class Config(object):
     pass
 
 
 class ProdConfig(Config):
-    pass
+    DEBUG = False
+    TESTING = False
 
 
 class DevConfig(Config):
-    print('Development')
     DEBUG = True
+    TESTING = False
 
     MYSQL_HOST = 'mysql'
     MYSQL_USER = 'hccu'
@@ -20,16 +24,7 @@ class DevConfig(Config):
     # print('SQLALCHEMY_DATABASE_URI ＝ ', SQLALCHEMY_DATABASE_URI)
 
 
-class TestConfig(Config):
-    print('Test')
+class TestConfig(DevConfig):
     DEBUG = True
-    SERVER_NAME = 'localhost:8888'
-
-    MYSQL_HOST = 'mysql'
-    MYSQL_USER = 'hccu'
-    MYSQL_PASSWORD = 'hccu'
-    MYSQL_DB = 'hccu'
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{}:{}@{}/{}'.format(
-        MYSQL_USER, MYSQL_PASSWORD, MYSQL_HOST, MYSQL_DB)
-
-    # print('SQLALCHEMY_DATABASE_URI ＝ ', SQLALCHEMY_DATABASE_URI)
+    TESTING = True
+    SERVER_NAME = 'localhost'

@@ -10,12 +10,7 @@ def app():
 
     :return: Flask app
     """
-    params = {
-        'DEBUG': False,
-        'TESTING': True,
-    }
-
-    _app = create_app(settings_override=params)
+    _app = create_app('config.TestConfig')
 
     # Establish an application context before running the tests.
     ctx = _app.app_context()
