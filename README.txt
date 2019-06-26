@@ -8,14 +8,43 @@ $ git clone https://github.com/amostsai/flask_init.git
 $ docker-compose up
 
 ## 輸入測試資料
-1. 打開瀏覽器，連到http://localhost
-2. 輸入姓、名資料
+1. 打開瀏覽器，連到http://localhost/news
+
+## 修改資料
+env
+    flask
+        setup.py
+            name='newproject-CLI',
+            newproject=cli.cli:cli
+    mysql
+        Dockerfile-mysql
+            ENV MYSQL_DATABASE=hccu \
+            MYSQL_USER=hccu \
+            MYSQL_PASSWORD=hccu \
+            MYSQL_ROOT_PASSWORD=hccu_root
+    nginx
+        app.conf
+            server_name localhost;
+docker-compose.yml
+    - "8888:8888" # 測試用，正式環境需刪除
+    # restart: always # 正式環境解除註解
+webapp
+    config.py
+        MYSQL_USER = 'hccu'
+        MYSQL_PASSWORD = 'hccu'
+        MYSQL_DB = 'hccu'
+
+
+
 
 ## 測試環境
 uwsgi --module app --callable app --http :8888 --master --enable-threads --py-autoreload=1
 
 ## 執行測試
-docker-compose exec flask py.test tests
+# docker-compose exec flask py.test tests
+1. docker-compose exec flask webcli test    # 執行測試
+2. docker-compose exec flask webcli cov     # 測試覆蓋率
+3. docker-compose exec flask webcli flake8  #
 
 ## 備份資料庫
 $ docker exec -i flask_init_mysql_1 mysqldump -u hccu -p hccu > backup_db.sql

@@ -8,7 +8,7 @@ services:
       dockerfile: ./env/flask/Dockerfile-flask
     environment:
       - FLASK_ENV
-    restart: always
+    # restart: always
     ports:
       - "32770:22"
       - "8888:8888" # 測試用，正式環境需刪除
@@ -22,7 +22,7 @@ services:
     build:
       context: .
       dockerfile: ./env/nginx/Dockerfile-nginx
-    restart: always
+    # restart: always
     ports:
       - "80:80"
     depends_on:
@@ -35,7 +35,7 @@ services:
     build:
       context: .
       dockerfile: ./env/mysql/Dockerfile-mysql
-    restart: always
+    # restart: always
     ports:
       - "3306:3306"
     expose:

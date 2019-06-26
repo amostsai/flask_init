@@ -1,6 +1,3 @@
-from flask import g
-
-
 class Config(object):
     pass
 
