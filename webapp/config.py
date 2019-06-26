@@ -6,6 +6,8 @@ class ProdConfig(Config):
     DEBUG = False
     TESTING = False
 
+    # SECRET_KEY = ''
+
 
 class DevConfig(Config):
     DEBUG = True
@@ -19,6 +21,8 @@ class DevConfig(Config):
         MYSQL_USER, MYSQL_PASSWORD, MYSQL_HOST, MYSQL_DB)
 
     # print('SQLALCHEMY_DATABASE_URI ＝ ', SQLALCHEMY_DATABASE_URI)
+
+    SECRET_KEY = 'dkeos;eokfeeiddaj;sief'
 
 
 class TestConfig(DevConfig):
