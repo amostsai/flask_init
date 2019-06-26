@@ -28,7 +28,6 @@ COPY ./webapp/ ./
 # Create python-click customer command
 RUN pip install --editable .
 
-RUN echo "======== keep webcli.egg-info in images ========"
 # ssh test
 # RUN apt update && apt install -y openssh-server && \
 #     mkdir /var/run/sshd && \
