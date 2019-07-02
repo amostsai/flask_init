@@ -5,7 +5,7 @@ services:
     image: webapp-flask
     build:
       context: .
-      dockerfile: ./env/flask/Dockerfile-flask
+      dockerfile: ./env/flask/Dockerfile
     environment:
       - FLASK_ENV
     # restart: always
@@ -21,7 +21,7 @@ services:
     image: webapp-nginx
     build:
       context: .
-      dockerfile: ./env/nginx/Dockerfile-nginx
+      dockerfile: ./env/nginx/Dockerfile
     # restart: always
     ports:
       - "80:80"
@@ -34,7 +34,7 @@ services:
     image: webapp-mysql
     build:
       context: .
-      dockerfile: ./env/mysql/Dockerfile-mysql
+      dockerfile: ./env/mysql/Dockerfile
     # restart: always
     ports:
       - "3306:3306"
