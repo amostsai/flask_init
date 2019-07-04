@@ -7,6 +7,15 @@ FROM python:3.6
 ENV APP /app
 ENV PYTHONUNBUFFERED 1 # python 執行訊息重新顯示到標準輸出
 
+
+
+# test celery
+ENV C_FORCE_ROOT true
+ENV CELERY_BROKER_URL redis://redis:6379/0
+ENV CELERY_RESULT_BACKEND redis://redis:6379/0
+
+
+
 # Create the directory and instruct Docker to operate
 # from there from now on
 RUN mkdir $APP

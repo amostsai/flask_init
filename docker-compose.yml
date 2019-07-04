@@ -44,9 +44,28 @@ services:
       #      - ./mysql:/var/lib/mysql
       - ./env/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d/
       - /etc/localtime:/etc/localtime:ro
-#      - mysql_data:/var/lib/mysql/data
+  # - mysql_data:/var/lib/mysql/data
 
-#volumes:
+  celery:
+    image: webapp-celery
+    build:
+      context: celeryapp
+      dockerfile: Dockerfile
+    # restart: always
+    ports:
+      - "5555:5555"
+    command: celery worker -A tasks --broker=redis://redis:6379/0
+
+  redis:
+    image: redis:latest
+    volumes:
+      - "redis:/var/lib/redis/data"
+    ports:
+      - "6379:6379"
+  # command: redis-server --requirepass devpassword
+  # restart: always
+volumes:
+  redis:
 #  mysql_data:
 
 #networks:
