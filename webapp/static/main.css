@@ -8,6 +8,11 @@ body {
   color: #5a5a5a;
 }
 
+#flash-messages {
+  position: absolute;
+  right: 0px;
+}
+
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 

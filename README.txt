@@ -34,6 +34,17 @@ webapp
         MYSQL_PASSWORD = 'hccu'
         MYSQL_DB = 'hccu'
 
+        MAIL_DEFAULT_SENDER = 'xxxx@gmail.com'
+        MAIL_SERVER = 'smtp.gmail.com'
+        MAIL_PORT = 587
+        MAIL_USE_TLS = True
+        MAIL_USE_SSL = False
+        MAIL_USERNAME = 'xxxx@gmail.com'
+        MAIL_PASSWORD = 'xxxxxxxx'
+
+        CELERY_BROKER_URL = 'redis://:devpassword@redis:6379/0'
+        CELERY_RESULT_BACKEND = 'redis://:devpassword@redis:6379/0'
+
 
 
 

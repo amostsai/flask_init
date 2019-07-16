@@ -9,7 +9,7 @@ ENV PYTHONUNBUFFERED 1 # python 執行訊息重新顯示到標準輸出
 
 
 
-# test celery
+# celery
 ENV C_FORCE_ROOT true
 ENV CELERY_BROKER_URL redis://:devpassword@redis:6379/0
 ENV CELERY_RESULT_BACKEND redis://:devpassword@redis:6379/0

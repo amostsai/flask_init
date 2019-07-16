@@ -10,3 +10,15 @@ kombu==4.2.0
 # pytz==2018.3
 # vine==1.1.4
 # tornado==5.0.2
+
+
+Flask==1.0.2
+
+
+# Forms.
+Flask-WTF==0.9.5
+WTForms-Components==0.9.7
+
+# Extensions.
+flask-debugtoolbar==0.10.1
+Flask-Mail==0.9.1
