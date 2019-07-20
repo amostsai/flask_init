@@ -12,6 +12,5 @@ def cli(path):
     :param path: Test path
     :return: Subprocess call result
     """
-    print('path: ', path)
     cmd = 'py.test {0}'.format(path)
     return subprocess.call(cmd, shell=True)

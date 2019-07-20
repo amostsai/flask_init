@@ -57,8 +57,12 @@ uwsgi --module app --callable app --http :8888 --master --enable-threads --py-au
 2. docker-compose exec flask webcli cov     # 測試覆蓋率
 3. docker-compose exec flask webcli flake8  #
 
-## 備份資料庫
-$ docker exec -i flask_init_mysql_1 mysqldump -u hccu -p hccu > backup_db.sql
+## 資料庫
+1. docker-compose exec flask webcli db      # 顯示資料庫相關指令
+2. docker-compose exec flask webcli db init  # 初始化資料庫
+3. docker-compose exec flask webcli db seed  # 輸入初始資料
+4. docker-compose exec flask webcli db reset --with-testdb       # 初始化資料庫（非必要）
+$ docker exec -i flask_init_mysql_1 mysqldump -u hccu -p hccu > backup_db.sql # 備份資料庫資料
 
 
 ## 參考資料

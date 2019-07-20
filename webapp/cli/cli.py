@@ -37,7 +37,7 @@ class CLI(click.MultiCommand):
 
         with open(filename) as f:
             code = compile(f.read(), filename, 'exec')
-            eval(code, ns, ns)
+            eval(code, ns, ns)  # TODO: check this security!
 
         return ns['cli']
 

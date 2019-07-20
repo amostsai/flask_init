@@ -2,6 +2,10 @@
 # not particularly care what OS runs underneath
 FROM python:3.6
 
+# RUN apt-get update && apt-get install -qq -y \
+#     build-essential libpq-dev --no-install-recommends
+
+
 # Set an environment variable with the directory
 # where we'll be running the app
 ENV APP /app
