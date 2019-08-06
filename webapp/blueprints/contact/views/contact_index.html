@@ -8,9 +8,10 @@ questions or concerns.{% endblock %} {% block body %}
     <legend>We're here to answer your questions</legend>
 
     {% call f.form_group(form.email, css_class='margin-bottom',
-    placeholder='E-mail address') %} {% endcall %} {% call f.form_group(
-    form.message, css_class='margin-bottom', placeholder='The more we know, the
-    easier it will be to help you', rows='12') %} {% endcall %}
+    placeholder='E-mail address', autofocus='autofocus') %} {% endcall %} {%
+    call f.form_group( form.message, css_class='margin-bottom', placeholder='The
+    more we know, the easier it will be to help you', rows='12') %} {% endcall
+    %}
 
     <button type="submit" class="btn btn-primary">Send e-mail</button>
     {% endcall %}

@@ -19,7 +19,7 @@ def deliver_contact_email(email, message):
                           sender=email,
                           recipients=[celeryapp.conf.get('MAIL_USERNAME')],
                           reply_to=email,
-                          template='mail_index', ctx=ctx)
+                          template='mail/mail_index', ctx=ctx)
 
     return None
 

@@ -8,7 +8,8 @@ $ git clone https://github.com/amostsai/flask_init.git
 $ docker-compose up
 
 ## 輸入測試資料
-1. 打開瀏覽器，連到http://localhost/news
+1. 執行 docker-compose exec flask webcli db init 建立初始資料庫
+2. 打開瀏覽器，連到http://localhost/news
 
 ## 修改資料
 env
