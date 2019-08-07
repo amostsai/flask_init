@@ -17,9 +17,6 @@ class AwareDateTime(TypeDecorator):
     impl = DateTime(timezone=True)
 
     def process_bind_param(self, value, dialect):
-        print('======> ', isinstance(value, datetime.datetime))
-        print('======> ', value.tzinfo)
-
         if isinstance(value, datetime.datetime) and value.tzinfo is None:
             raise ValueError('{!r} must be TZ-aware'.format(value))
         return value
@@ -30,11 +27,9 @@ class AwareDateTime(TypeDecorator):
 
 class ResourceMixin(object):
     # Keep track when records are created and updated.
-    created_on = db.Column(AwareDateTime(),
-                           default=tzware_datetime)
-    updated_on = db.Column(AwareDateTime(),
-                           default=tzware_datetime,
-                           onupdate=tzware_datetime)
+    created_on = db.Column(AwareDateTime(), default=tzware_datetime)
+    updated_on = db.Column(
+        AwareDateTime(), default=tzware_datetime, onupdate=tzware_datetime)
 
     def save(self):
         """

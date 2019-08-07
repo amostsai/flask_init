@@ -6,6 +6,7 @@ kombu==4.2.0
 Flask==1.0.2
 
 # Data and workers.
+PyMySQL==0.9.3
 Flask-SQLAlchemy==2.1
 
 # Forms.
