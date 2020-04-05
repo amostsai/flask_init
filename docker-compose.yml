@@ -26,10 +26,15 @@ services:
       dockerfile: ./env/nginx/Dockerfile
     ports:
       - "80:80"
+      - "443:443"
     depends_on:
       - flask
     volumes:
       - /etc/localtime:/etc/localtime:ro
+      - /etc/letsencrypt:/etc/letsencrypt
+      - /root/flask_init-master/env/nginx/www:/var/www
+      - /var/log/letsencrypt:/var/log/letsencrypt
+      - /root/letsencrypt/lib:/var/lib/letsencrypt
     networks:
       flask_init:
     # restart: always
