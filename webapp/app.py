@@ -108,6 +108,11 @@ app = create_app('config.%sConfig' % env.capitalize())
 celeryapp = create_celery_app(app)
 
 
+@app.route('/')
+def index():
+    return '<p>hello</>'
+
+
 # test celery
 @app.route('/add/<int:param1>/<int:param2>')
 def add(param1: int, param2: int) -> str:
