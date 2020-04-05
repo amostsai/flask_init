@@ -32,7 +32,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/letsencrypt:/etc/letsencrypt
-      - /root/flask_init-master/env/nginx/www:/var/www
+      - ./env/nginx/www:/var/www
       - /var/log/letsencrypt:/var/log/letsencrypt
       - /root/letsencrypt/lib:/var/lib/letsencrypt
     networks:
