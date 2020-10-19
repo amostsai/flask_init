@@ -31,10 +31,10 @@ services:
       - flask
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /etc/letsencrypt:/etc/letsencrypt
       - ./env/nginx/www:/var/www
-      - /var/log/letsencrypt:/var/log/letsencrypt
-      - /root/letsencrypt/lib:/var/lib/letsencrypt
+      # - /etc/letsencrypt:/etc/letsencrypt
+      # - /var/log/letsencrypt:/var/log/letsencrypt
+      # - /root/letsencrypt/lib:/var/lib/letsencrypt
     networks:
       flask_init:
     # restart: always
@@ -57,34 +57,35 @@ services:
       flask_init:
   # restart: always
 
-  celery:
-    image: webapp-celery
-    build:
-      context: celeryapp
-      dockerfile: Dockerfile
-    volumes:
-      - ./webapp:/app
-    ports:
-      - "5555:5555"
-    working_dir: /app
-    command: celery worker -l info -A blueprints.contact.tasks --broker=redis://:devpassword@redis:6379/0
-    networks:
-      flask_init:
-    # restart: always
+  # celery:
+  #   image: webapp-celery
+  #   build:
+  #     context: celeryapp
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ./webapp:/app
+  #   ports:
+  #     - "5555:5555"
+  #   working_dir: /app
+  #   command: celery worker -l info -A blueprints.contact.tasks --broker=redis://:devpassword@redis:6379/0
+  #   networks:
+  #     flask_init:
+  #   # restart: always
 
-  redis:
-    image: redis:latest
-    volumes:
-      - "redis:/var/lib/redis/data"
-    ports:
-      - "6379:6379"
-    command: redis-server --requirepass devpassword
-    networks:
-      flask_init:
-    # restart: always
+  # redis:
+  #   image: redis:latest
+  #   volumes:
+  #     - "redis:/var/lib/redis/data"
+  #   ports:
+  #     - "6379:6379"
+  #   command: redis-server --requirepass devpassword
+  #   networks:
+  #     flask_init:
+  #  # restart: always
+
 volumes:
-  redis:
   mysql:
+  # redis:
 
 networks:
   flask_init:

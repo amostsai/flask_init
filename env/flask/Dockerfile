@@ -14,9 +14,9 @@ ENV PYTHONUNBUFFERED 1 # python 執行訊息重新顯示到標準輸出
 
 
 # celery
-ENV C_FORCE_ROOT true
-ENV CELERY_BROKER_URL redis://:devpassword@redis:6379/0
-ENV CELERY_RESULT_BACKEND redis://:devpassword@redis:6379/0
+# ENV C_FORCE_ROOT true
+# ENV CELERY_BROKER_URL redis://:devpassword@redis:6379/0
+# ENV CELERY_RESULT_BACKEND redis://:devpassword@redis:6379/0
 
 
 # Create the directory and instruct Docker to operate
@@ -40,21 +40,7 @@ COPY ./webapp/ ./
 # Create python-click customer command
 RUN pip install --editable .
 
-# ssh test
-# RUN apt update && apt install -y openssh-server && \
-#     mkdir /var/run/sshd && \
-#     echo 'root:root' | chpasswd && \
-#     sed -ri 's/^#?PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config && \
-#     sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config && \
-#     mkdir /root/.ssh && \
-#     apt clean && \
-#     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
 
 # Finally, we run uWSGI with the ini file we
 # created earlier
 CMD [ "uwsgi", "--ini", "app.ini" ]
-#CMD ["/usr/sbin/sshd", "-D"]
-#CMD ["sh", "-c", "uwsgi --ini app.ini; /usr/sbin/sshd -D"]
-#CMD ["./flask_cmd"]
-#ENTRYPOINT ["./flask_cmd.sh"]
