@@ -1,8 +1,8 @@
 import os
 from flask import Flask
 from flask import url_for
-from celery import Celery
-import celery.states as states
+# from celery import Celery
+# import celery.states as states
 from itsdangerous import URLSafeTimedSerializer
 
 # from worker import celery
@@ -12,36 +12,41 @@ from blueprints.user import user
 from blueprints.user.models import User
 from extensions import debug_toolbar, mail, csrf, db, login_manager
 
-CELERY_TASK_LIST = [
-    'blueprints.contact.tasks',
-    'blueprints.user.tasks',
-]
+# debug in container!
+from debugger import initialize_flask_server_debugger_if_needed
+initialize_flask_server_debugger_if_needed()
 
 
-def create_celery_app(app):
-    """
-    Create a new Celery object and tie together the Celery config to the app's
-    config. Wrap all tasks in the context of the application.
+# CELERY_TASK_LIST = [
+#     'blueprints.contact.tasks',
+#     'blueprints.user.tasks',
+# ]
 
-    :param app: Flask app
-    :return: Celery app
-    """
-    celery = Celery(
-        app.import_name, broker=app.config['CELERY_BROKER_URL'], include=CELERY_TASK_LIST)
 
-    celery.conf.update(app.config)
+# def create_celery_app(app):
+#     """
+#     Create a new Celery object and tie together the Celery config to the app's
+#     config. Wrap all tasks in the context of the application.
 
-    TaskBase = celery.Task
+#     :param app: Flask app
+#     :return: Celery app
+#     """
+#     celery = Celery(
+#         app.import_name, broker=app.config['CELERY_BROKER_URL'], include=CELERY_TASK_LIST)
 
-    class ContextTask(TaskBase):
-        abstract = True
+#     celery.conf.update(app.config)
 
-        def __call__(self, *args, **kwargs):
-            with app.app_context():
-                return TaskBase.__call__(self, *args, **kwargs)
+#     TaskBase = celery.Task
 
-    celery.Task = ContextTask
-    return celery
+#     class ContextTask(TaskBase):
+#         abstract = True
+
+#         def __call__(self, *args, **kwargs):
+#             with app.app_context():
+#                 return TaskBase.__call__(self, *args, **kwargs)
+
+#     celery.Task = ContextTask
+#     return celery
 
 
 def create_app(mode):
@@ -105,7 +110,7 @@ def authentication(app, user_model):
 env = os.environ.get('FLASK_ENV', 'prod')
 app = create_app('config.%sConfig' % env.capitalize())
 
-celeryapp = create_celery_app(app)
+# celeryapp = create_celery_app(app)
 
 
 @app.route('/')
@@ -114,18 +119,23 @@ def index():
 
 
 # test celery
-@app.route('/add/<int:param1>/<int:param2>')
-def add(param1: int, param2: int) -> str:
-    task = celeryapp.send_task('blueprints.contact.tasks.add', args=[
-                               param1, param2], kwargs={})
-    response = f"<a href='{url_for('check_task', task_id=task.id, external=True)}'>check status of {task.id} </a>"
-    return response
+# @app.route('/add/<int:param1>/<int:param2>')
+# def add(param1: int, param2: int) -> str:
+#     task = celeryapp.send_task('blueprints.contact.tasks.add', args=[
+#                                param1, param2], kwargs={})
+#     response = f"<a href='{url_for('check_task', task_id=task.id, external=True)}'>check status of {task.id} </a>"
+#     return response
 
 
-@app.route('/check/<string:task_id>')
-def check_task(task_id: str) -> str:
-    res = celeryapp.AsyncResult(task_id)
-    if res.state == states.PENDING:
-        return res.state
-    else:
-        return str(res.result)
+# @app.route('/check/<string:task_id>')
+# def check_task(task_id: str) -> str:
+#     res = celeryapp.AsyncResult(task_id)
+#     if res.state == states.PENDING:
+#         return res.state
+#     else:
+#         return str(res.result)
+
+@app.route('/url_map')  # TODO: 正式上線時要註解掉！
+def show_urlmap():
+    print(app.url_map)
+    return ('', 200)

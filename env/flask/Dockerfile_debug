@@ -10,7 +10,7 @@ FROM python:3.7
 # where we'll be running the app
 ENV APP /app
 ENV PYTHONUNBUFFERED 1 # python 執行訊息重新顯示到標準輸出
-
+ENV PYTHONDONTWRITEBYTECODE 1  # Turns off buffering for easier container logging
 
 
 # celery
@@ -44,4 +44,4 @@ RUN pip install --editable .
 
 # Finally, we run uWSGI with the ini file we
 # created earlier
-CMD [ "uwsgi", "--ini", "app.ini" ]
+CMD ["flask", "run", "--host", "0.0.0.0"]

@@ -43,8 +43,7 @@ class ProdConfig(Config):
     SEED_ADMIN_PASSWORD = 'devpassword'
     REMEMBER_COOKIE_DURATION = timedelta(days=90)
 
-
-class DevConfig(Config):
+class DevelopmentConfig(Config):
     DEBUG = True
     TESTING = False
 
@@ -85,7 +84,7 @@ class DevConfig(Config):
     REMEMBER_COOKIE_DURATION = timedelta(days=90)
 
 
-class TestConfig(DevConfig):
+class TestConfig(DevelopmentConfig):
     DEBUG = True
     TESTING = True
     SERVER_NAME = 'localhost'

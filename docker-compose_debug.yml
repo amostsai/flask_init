@@ -1,15 +1,19 @@
 version: "3"
 
 services:
-  flask:
-    image: webapp-flask
+  flask_debug:
+    image: webapp-flask-debug
     build:
       context: .
-      dockerfile: ./env/flask/Dockerfile
+      dockerfile: ./env/flask/Dockerfile_debug
     environment:
       - FLASK_ENV
+      - FLASK_APP=app.py
+      - DEBUGGER=True
+      - FLASK_ENV=development 
     ports:
       - 5000:5000
+      - 10001:10001
     volumes:
       - ./webapp:/app
       - /etc/localtime:/etc/localtime:ro
@@ -27,7 +31,7 @@ services:
       - "80:80"
       - "443:443"
     depends_on:
-      - flask
+      - flask_debug
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./env/nginx/www:/var/www
